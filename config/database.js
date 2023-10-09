@@ -9,17 +9,14 @@ const url = process.env.DB_URI;
 mongoose.set('strictQuery', true);
 
 const connectDatabase = () => {
-    mongoose
-        .connect(url, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        })
-        .then((con) => {
-            console.log(
-                `MongoDB Database connected with HOST: ${con.connection.host}`
-            );
-            // removeUniqueIndex();
-        });
+    try{
+      // connection to mongoose
+      mongoose.connect(url,{useUnifiedTopology:true,useNewUrlParser:true});
+      console.log("Database connected successfully");
+  }catch(err){
+      // if error
+      console.log("Error while comnnecting to the database",err);
+  }
 };
 
 const removeUniqueIndex = () => {
