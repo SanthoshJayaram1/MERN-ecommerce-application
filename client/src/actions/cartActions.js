@@ -31,11 +31,12 @@ export const removeItemFromCart = (id) => async (dispatch, getState) => {
         type: REMOVE_ITEM_CART,
         payload: id,
     });
+    localStorage.removeItem("cartItems");
 
-    localStorage.setItem(
-        "cartItems",
-        JSON.stringify(getState().cart.cartItems)
-    );
+    // localStorage.setItem(
+    //     "cartItems",
+    //     JSON.stringify(getState().cart.cartItems)
+    // );
 };
 
 export const saveShippingInfo = (data) => async (dispatch) => {

@@ -6,6 +6,7 @@ import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import { logout } from "../../../actions/userActions";
 
 import {
     useStripe,
@@ -46,6 +47,7 @@ const Payment = () => {
     useEffect(() => {
         if (error) {
             alert.error(error);
+            console.log(error);
             dispatch(clearErrors());
         }
     }, [dispatch, alert, error]);
@@ -74,12 +76,13 @@ const Payment = () => {
 
         let res;
         try {
+            const token=localStorage.getItem("jwt-token");
             const config = {
                 headers: {
                     "Content-Type": "application/json",
+                    "jwt-token":token
                 },
             };
-
             res = await axiosInstance.post(
                 "/api/v1/payment/process",
                 paymentData,
@@ -122,7 +125,13 @@ const Payment = () => {
             }
         } catch (error) {
             document.querySelector("#pay_btn").disabled = false;
+            console.log(error.response.data.message);
             alert.error(error.response.data.message);
+            if(error.response.data.message=="Session expired. Try Again!!!"){
+                dispatch(logout());
+                alert.success("Logged out successfully.");
+            }
+            
         }
     };
     return (

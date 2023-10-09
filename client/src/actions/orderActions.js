@@ -20,6 +20,8 @@ import {
     MY_ORDERS_SUCCESS,
     MY_ORDERS_FAIL,
 } from "../constants/orderConstants";
+import { REMOVE_ITEM_CART } from "../constants/cartConstants";
+// import { removeItemFromCart } from "./cartActions";
 
 export const createOrder = (order) => async (dispatch, getState) => {
     try {
@@ -28,7 +30,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         const token=localStorage.getItem("jwt-token");
         const config = {
             headers: {
-                "Content-Type": "multipart/form-data",
+                "Content-Type": "application/json",
                 "jwt-token":token
             },
             
@@ -39,10 +41,16 @@ export const createOrder = (order) => async (dispatch, getState) => {
             order,
             config
         );
+        console.log(data.order.user);
 
         dispatch({
             type: CREATE_ORDER_SUCCESS,
             payload: data,
+        });
+        // dispatch(removeItemFromCart(data.order.user));
+        dispatch({
+            type: REMOVE_ITEM_CART,
+            payload: data.order.user,
         });
     } catch (error) {
         dispatch({
