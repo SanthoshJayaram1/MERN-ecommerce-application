@@ -1,8 +1,16 @@
 const mongoose = require("mongoose");
+const dotenv=require("dotenv");
+
+// env config and env variables
+dotenv.config();
+const url = process.env.DB_URI;
+
+// setting mongoose default options
+mongoose.set('strictQuery', true);
 
 const connectDatabase = () => {
     mongoose
-        .connect(process.env.DB_URI, {
+        .connect(url, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
