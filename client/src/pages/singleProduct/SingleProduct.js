@@ -8,6 +8,7 @@ import {
     getProductDetails,
     newReview,
 } from "../../actions/productAction";
+import { logout } from "../../actions/userActions";
 import Loader from "../../components/loader/Loader";
 import {
     AiOutlineCloseCircle,
@@ -80,6 +81,9 @@ const SingleProduct = ({ match }) => {
 
         if (error) {
             alert.error(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
 

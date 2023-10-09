@@ -25,7 +25,7 @@ const Home = () => {
         dispatch(getAdminProducts());
 
         if (error) {
-            return alert.error(error);
+            alert.error(error);
         }
     }, [dispatch, alert, error]);
     return (

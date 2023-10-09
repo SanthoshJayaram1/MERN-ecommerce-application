@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import Loader from "../../../components/loader/Loader";
 import ProfileLink from "../../../components/profileLinks/ProfileLink";
-
+import { logout } from "../../../actions/userActions";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./MyOrders.module.scss";
@@ -22,6 +22,9 @@ const MyOrders = () => {
 
         if (error) {
             alert.error(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
     }, [dispatch, alert, error]);

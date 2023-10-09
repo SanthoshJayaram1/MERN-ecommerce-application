@@ -13,7 +13,7 @@ import Sidebar from "../../../components/admin/sidebar/Sidebar";
 import MetaData from "../../../components/MetaData";
 import { DELETE_REVIEW_RESET } from "../../../constants/productsConstants";
 import styles from "./ProductReview.module.scss";
-
+import { logout } from "../../../actions/userActions";
 const ProductReview = () => {
     const [productId, setProductId] = useState("");
 
@@ -28,6 +28,9 @@ const ProductReview = () => {
     useEffect(() => {
         if (error) {
             alert.error(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
 

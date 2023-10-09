@@ -41,17 +41,20 @@ export const createOrder = (order) => async (dispatch, getState) => {
             order,
             config
         );
-        console.log(data.order.user);
 
         dispatch({
             type: CREATE_ORDER_SUCCESS,
             payload: data,
         });
-        // dispatch(removeItemFromCart(data.order.user));
-        dispatch({
-            type: REMOVE_ITEM_CART,
-            payload: data.order.user,
+
+        data.order.orderItems.forEach(order => {
+            dispatch({
+                type:REMOVE_ITEM_CART,
+                payload:order.product
+            })
         });
+        localStorage.removeItem("cartItems");
+        
     } catch (error) {
         dispatch({
             type: CREATE_ORDER_FAIL,

@@ -10,7 +10,7 @@ import Navbar from "../../../../components/admin/navbar/Navbar";
 import Sidebar from "../../../../components/admin/sidebar/Sidebar";
 import MetaData from "../../../../components/MetaData";
 import { UPDATE_USER_RESET } from "../../../../constants/userConstants";
-
+import { logout } from "../../../../actions/userActions";
 import styles from "./UserDetails.module.scss";
 
 const UserDetails = ({ history, match }) => {
@@ -38,6 +38,9 @@ const UserDetails = ({ history, match }) => {
 
         if (error) {
             alert.error(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
 

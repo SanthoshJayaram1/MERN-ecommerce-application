@@ -72,7 +72,7 @@ export const newProduct = (productData) => async (dispatch) => {
         const token=localStorage.getItem("jwt-token");
         const config = {
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "multipart/form-data",
                 "jwt-token":token
             },
         };
@@ -175,8 +175,15 @@ export const deleteProduct = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_PRODUCT_REQUEST });
 
+        const token=localStorage.getItem("jwt-token");
+        const config = {
+            headers: {
+                "jwt-token":token
+            },
+        };
+
         const { data } = await axiosInstance.delete(
-            `/api/v1/admin/product/${id}`
+            `/api/v1/admin/product/${id}`,config
         );
 
         dispatch({

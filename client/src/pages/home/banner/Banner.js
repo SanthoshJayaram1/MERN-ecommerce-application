@@ -28,7 +28,7 @@ const Banner = () => {
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className={styles.slider_text}>
-                                        <p>SPRING / SUMMER COLLECTION 2022</p>
+                                        <p>SPRING / SUMMER COLLECTION 2023</p>
                                         <h1>Get up to 30% off New Arrivals</h1>
                                         <div>
                                             <Link to="/products">Shop now</Link>
@@ -53,7 +53,7 @@ const Banner = () => {
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className={styles.slider_text}>
-                                        <p>SPRING / SUMMER COLLECTION 2022</p>
+                                        <p>SPRING / SUMMER COLLECTION 2023</p>
                                         <h1>Get up to 30% off New Arrivals</h1>
                                         <div>
                                             <Link to="/products">Shop now</Link>

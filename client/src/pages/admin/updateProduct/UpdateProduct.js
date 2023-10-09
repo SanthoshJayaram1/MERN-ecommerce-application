@@ -11,7 +11,7 @@ import {
 import ButtonLoader from "../../../components/loader/ButtonLoader";
 import Sidebar from "../../../components/admin/sidebar/Sidebar";
 import { UPDATE_PRODUCT_RESET } from "../../../constants/productsConstants";
-
+import { logout } from "../../../actions/userActions";
 import styles from "./UpdateProduct.module.scss";
 import Navbar from "../../../components/admin/navbar/Navbar";
 import MetaData from "../../../components/MetaData";
@@ -70,6 +70,9 @@ const UpdateProduct = ({ history }) => {
 
         if (error) {
             alert.error(error);
+             if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
 

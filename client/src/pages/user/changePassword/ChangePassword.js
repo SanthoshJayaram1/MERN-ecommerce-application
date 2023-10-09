@@ -9,6 +9,7 @@ import MetaData from "../../../components/MetaData";
 import ProfileLink from "../../../components/profileLinks/ProfileLink";
 import { UPDATE_PASSWORD_RESET } from "../../../constants/userConstants";
 import styles from "./ChangePassword.module.scss";
+import { logout } from "../../../actions/userActions";
 
 const ChangePassword = ({ history }) => {
     const [oldPassword, setOldPassword] = useState("");
@@ -22,6 +23,9 @@ const ChangePassword = ({ history }) => {
     useEffect(() => {
         if (error) {
             alert.error(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
 

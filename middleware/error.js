@@ -28,13 +28,13 @@ module.exports = (err, req, res, next) => {
 
     // Handling wrong JWT error
     if (err.name === "JsonWebTokenError") {
-        const message = "Session is invalid. Try Again!!!";
+        const message = "Session is invalid";
         error = new ErrorHandler(message, 400);
     }
 
     // Handling Expired JWT error
     if (err.name === "TokenExpiredError") {
-        const message = "Session expired. Try Again!!!";
+        const message = "Session expired";
         error = new ErrorHandler(message, 400);
     }
 

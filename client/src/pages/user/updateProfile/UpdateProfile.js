@@ -7,6 +7,7 @@ import {
     loadUser,
     updateProfile,
 } from "../../../actions/userActions";
+import { logout } from "../../../actions/userActions";
 import Footer from "../../../components/footer/Footer";
 import Navbar from "../../../components/header/Navbar";
 import ButtonLoader from "../../../components/loader/ButtonLoader";
@@ -40,6 +41,9 @@ const UpdateProfile = ({ history }) => {
 
         if (error) {
             alert.error(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
 

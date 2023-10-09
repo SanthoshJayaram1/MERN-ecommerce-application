@@ -5,7 +5,7 @@ import { clearErrors, resetPassword } from "../../../actions/userActions";
 import Footer from "../../../components/footer/Footer";
 import Navbar from "../../../components/header/Navbar";
 import MetaData from "../../../components/MetaData";
-
+import { logout } from "../../../actions/userActions";
 import styles from "./ResetPassword.module.scss";
 
 const ResetPassword = ({ history, match }) => {
@@ -20,6 +20,9 @@ const ResetPassword = ({ history, match }) => {
     useEffect(() => {
         if (error) {
             alert.error(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
 

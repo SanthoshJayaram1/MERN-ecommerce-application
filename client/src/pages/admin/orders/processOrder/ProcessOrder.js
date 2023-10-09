@@ -13,6 +13,7 @@ import Loader from "../../../../components/loader/Loader";
 import { Link } from "react-router-dom";
 import Navbar from "../../../../components/admin/navbar/Navbar";
 import MetaData from "../../../../components/MetaData";
+import { logout } from "../../../../actions/userActions";
 
 const ProcessOrder = ({ match }) => {
     const [status, setStatus] = useState("");
@@ -38,6 +39,9 @@ const ProcessOrder = ({ match }) => {
 
         if (error) {
             alert.error(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
 

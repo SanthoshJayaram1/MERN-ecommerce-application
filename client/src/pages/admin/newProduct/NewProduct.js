@@ -10,6 +10,7 @@ import { NEW_PRODUCT_RESET } from "../../../constants/productsConstants";
 import ButtonLoader from "../../../components/loader/ButtonLoader";
 import Navbar from "../../../components/admin/navbar/Navbar";
 import MetaData from "../../../components/MetaData";
+import { logout } from "../../../actions/userActions";
 
 const NewProduct = ({ history }) => {
     const [name, setName] = useState("");
@@ -46,6 +47,9 @@ const NewProduct = ({ history }) => {
     useEffect(() => {
         if (error) {
             alert.error(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
 
@@ -224,7 +228,7 @@ const NewProduct = ({ history }) => {
                                         }
                                     >
                                         {types.map((type) => (
-                                            <option key={type}>
+                                            <option key={type} value={type}>
                                                 {type}
                                             </option>
                                         ))}

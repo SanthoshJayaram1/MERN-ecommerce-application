@@ -8,7 +8,7 @@ const cloudinary = require("cloudinary");
 const path = require("path");
 const errorMiddleware = require("./middleware/error");
 
-const cors = require('cors'); // Import the cors package
+const cors = require('cors'); 
 
 const app = express();
 dotenv.config();
@@ -17,14 +17,13 @@ app.use(cookieParser());
 app.use(
     cors({
       origin: 'http://localhost:3000',
-      credentials: true,// Allow cookies to be sent with the request (if applicable)
+      credentials: true,// Allow cookies to be sent with the request 
       methods: ['GET','HEAD','PUT','PATCH','POST','DELETE'],
       allowedHeaders:["Content-Type","jwt-token","Access-Control-Allow-Credentials"]
     })
   );
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(cookieParser());
 app.use(fileUpload());
 
 // import all routes
@@ -37,13 +36,6 @@ app.use("/api/v1", auth);
 app.use("/api/v1", products);
 app.use("/api/v1", payment);
 app.use("/api/v1", order);
-
-// Handle preflight OPTIONS requests
-// app.options('/api/v1/me/update', cors({
-//     origin: 'http://localhost:3000', // Replace with the origin of your frontend application
-//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//     credentials: true, // Allow cookies to be sent with the request (if applicable)
-//   }));
 
 
 app.use(express.static(path.join(__dirname, "/client/build")));

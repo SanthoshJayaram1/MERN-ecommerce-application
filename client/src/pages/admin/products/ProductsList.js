@@ -12,7 +12,7 @@ import {
 } from "../../../actions/productAction";
 import Loader from "../../../components/loader/Loader";
 import { Link } from "react-router-dom";
-
+import { logout } from "../../../actions/userActions";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { DELETE_PRODUCT_RESET } from "../../../constants/productsConstants";
 import Navbar from "../../../components/admin/navbar/Navbar";
@@ -31,6 +31,9 @@ const ProductsList = ({ history }) => {
 
         if (error) {
             alert.error(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
 

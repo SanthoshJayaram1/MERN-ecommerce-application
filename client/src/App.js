@@ -42,25 +42,9 @@ import { useSelector ,useDispatch} from "react-redux";
 import { getAdminProducts } from "./actions/productAction";
 
 function App() {
-    // const [stripeApiKey, setStripeApiKey] = useState("");
-    // const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-    // useEffect(()=>{
-    //     store.dispatch(loadUser());
-    // },[]);
-    // useEffect(() => {
-    //     // store.dispatch(loadUser());
-    //     console.log(isAuthenticated)
-    //     async function getStripApiKey() {
-    //         const { data } = await axiosInstance.get("/api/v1/stripeapi");
-    //         setStripeApiKey(data.stripeApiKey);
-    //     }
-    //     getStripApiKey();
-    // }, [isAuthenticated]);
 
     const dispatch = useDispatch();
-    // const [isLoggedIn, setIsLoggedIn] = useState(false);
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-    // if(isAuthenticated)setIsLoggedIn(true);
     
     const [stripeApiKey, setStripeApiKey] = useState("");
 
@@ -68,19 +52,10 @@ function App() {
       const { data } = await axiosInstance.get("/api/v1/stripeapi");
       setStripeApiKey(data.stripeApiKey);
     }
-  
-    // useEffect(()=>{
-    //     if(isAuthenticated)setIsLoggedIn(true);
-    // });
     useEffect(() => {
-        // if(isAuthenticated){
-            dispatch(getAdminProducts());
             dispatch(loadUser());
             getStripeApiKey();
-        // }
     }, [dispatch]);
-  
-    // window.addEventListener("contextmenu", (e) => e.preventDefault());
 
     return (
         <div className="app">

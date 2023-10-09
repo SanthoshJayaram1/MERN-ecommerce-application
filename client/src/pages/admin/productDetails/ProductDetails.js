@@ -3,7 +3,7 @@ import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, getProductDetails } from "../../../actions/productAction";
 import Sidebar from "../../../components/admin/sidebar/Sidebar";
-
+import { logout } from "../../../actions/userActions";
 import styles from "./ProductDetails.module.scss";
 import { useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
@@ -27,6 +27,9 @@ const ProductDetails = () => {
 
         if (error) {
             alert.error(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
     }, [dispatch, alert, error, id]);

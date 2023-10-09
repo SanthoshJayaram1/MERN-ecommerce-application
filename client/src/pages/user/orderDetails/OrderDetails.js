@@ -3,7 +3,7 @@ import ProfileLink from "../../../components/profileLinks/ProfileLink";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { FcInTransit, FcPaid, FcProcess, FcShipped } from "react-icons/fc";
-
+import { logout } from "../../../actions/userActions";
 import styles from "./OrderDetails.module.scss";
 import { clearErrors, getOrderDetails } from "../../../actions/orderActions";
 import { Link } from "react-router-dom";
@@ -56,6 +56,9 @@ const OrderDetails = ({ match }) => {
 
         if (error) {
             alert.error(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
     }, [dispatch, alert, error, match.params.id]);

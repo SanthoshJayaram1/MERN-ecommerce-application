@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import { DELETE_ORDER_RESET } from "../../../constants/orderConstants";
 import Navbar from "../../../components/admin/navbar/Navbar";
 import MetaData from "../../../components/MetaData";
+import { logout } from "../../../actions/userActions";
 
 const Orders = ({ history }) => {
     const alert = useAlert();
@@ -28,6 +29,9 @@ const Orders = ({ history }) => {
 
         if (error) {
             alert.error(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
 

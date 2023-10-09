@@ -43,24 +43,6 @@ const Navbar = () => {
             ? header.classList.add("is-sticky")
             : header.classList.remove("is-sticky");
     };
-    
-     // Sticky Menu Area
-    // useEffect(() => {
-    //     const handleScroll = () => {
-    //     const scrollTop = window.scrollY;
-    //     scrollTop >= 150 ? setIsSticky(true) : setIsSticky(false);
-    //     };
-
-    //     window.addEventListener("scroll", handleScroll);
-
-    //     // Clean up the event listener when the component unmounts
-    //     return () => {
-    //     window.removeEventListener("scroll", handleScroll);
-    //     };
-    // }, []);
-
-
-
     const alert = useAlert();
     const dispatch = useDispatch();
 

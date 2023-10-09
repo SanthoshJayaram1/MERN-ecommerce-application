@@ -47,7 +47,9 @@ const Payment = () => {
     useEffect(() => {
         if (error) {
             alert.error(error);
-            console.log(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
     }, [dispatch, alert, error]);
@@ -119,17 +121,17 @@ const Payment = () => {
                     dispatch(createOrder(order));
 
                     history.push("/success");
+
+                    setTimeout(()=>{history.push("/")},4000);
                 } else {
                     alert.error("There is some issue while payment processing");
                 }
             }
         } catch (error) {
             document.querySelector("#pay_btn").disabled = false;
-            console.log(error.response.data.message);
             alert.error(error.response.data.message);
             if(error.response.data.message=="Session expired. Try Again!!!"){
                 dispatch(logout());
-                alert.success("Logged out successfully.");
             }
             
         }

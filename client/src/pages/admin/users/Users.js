@@ -8,6 +8,7 @@ import {
     allUsers,
     clearErrors,
     deleteUser,
+    logout
 } from "../../../actions/userActions";
 import Loader from "../../../components/loader/Loader";
 import Sidebar from "../../../components/admin/sidebar/Sidebar";
@@ -15,6 +16,7 @@ import { DELETE_USER_RESET } from "../../../constants/userConstants";
 import styles from "./Users.module.scss";
 import Navbar from "../../../components/admin/navbar/Navbar";
 import MetaData from "../../../components/MetaData";
+
 
 const Users = ({ history }) => {
     const alert = useAlert();
@@ -28,6 +30,9 @@ const Users = ({ history }) => {
 
         if (error) {
             alert.error(error);
+            if(error=="Session expired"){
+                dispatch(logout());
+            }
             dispatch(clearErrors());
         }
 

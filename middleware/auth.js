@@ -8,8 +8,6 @@ const catchAsyncErrors = require("./catchAsyncErrors");
 exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
   const tokenHeaderKey="jwt-token";
   const token=req.headers[tokenHeaderKey];
-  // const { token } = req.cookies;
-  //  console.log(req.cookies);
   if (!token) {
     return next(new ErrorHandler("Login first to access this resource.", 401));
   }
