@@ -8,14 +8,14 @@ const url = process.env.DB_URI;
 // setting mongoose default options
 mongoose.set('strictQuery', true);
 
-const connectDatabase = () => {
-    try{
-      // connection to mongoose
-      mongoose.connect(url,{useUnifiedTopology:true,useNewUrlParser:true});
-      console.log("Database connected successfully");
-  }catch(err){
-      // if error
-      console.log("Error while comnnecting to the database",err);
+const connectDatabase = async () => {
+  try {
+    // connection to mongoose
+    await mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true });
+    console.log("Database connected successfully");
+  } catch (err) {
+    // if error
+    console.error("Error while connecting to the database", err);
   }
 };
 
