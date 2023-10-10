@@ -39,7 +39,7 @@ const Navbar = () => {
     const isSticky = (e) => {
         const header = document.querySelector(".links");
         const scrollTop = window.scrollY;
-        scrollTop >= 150
+        scrollTop >= 100
             ? header.classList.add("is-sticky")
             : header.classList.remove("is-sticky");
     };
@@ -58,7 +58,7 @@ const Navbar = () => {
                     <div className="d-flex align-items-center">
                         <img
                             style={{ height: "50px" }}
-                            src="https://res.cloudinary.com/mehedi08h/image/upload/v1648446111/shopx/logo2_diozsh.png"
+                            src="https://res.cloudinary.com/dcifutdzw/image/upload/v1696941081/shoppify_logo_samawn.png"
                             alt=""
                         />
                     </div>
@@ -217,6 +217,44 @@ const Navbar = () => {
                                             About
                                         </Link>
                                     </li>
+                                    {user ?(<>
+                                        <li>
+                                            <Link
+                                                to="/me"
+                                                onClick={() => setToggle(false)}
+                                            >
+                                                Profile
+                                            </Link>
+                                        </li>
+
+                                        {user?.role === "admin" && (
+                                                       <li>
+                                                            <Link
+                                                                to="/admin"
+                                                                onClick={() => setToggle(false)}
+                                                            >
+                                                                Dashboard
+                                                            </Link>
+                                                        </li>
+                                                    )}
+
+                                        <li>
+                                            <Link
+                                                to="/"
+                                                id="logout"
+                                                onClick={logoutHandler}
+                                            >
+                                                Logout
+                                            </Link>
+                                        </li>
+                                    </>):(<li>
+                                        <Link
+                                            to="/login"
+                                            onClick={() => setToggle(false)}
+                                        >
+                                            Login
+                                        </Link>
+                                    </li>)}
                                 </ul>
                             </motion.div>
                         )}

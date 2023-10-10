@@ -5,7 +5,6 @@ import Login from "./pages/auth/login/Login";
 import Products from "./pages/products/Products";
 import Register from "./pages/auth/register/Register";
 import { useEffect, useState } from "react";
-import store from "./store";
 import { loadUser } from "./actions/userActions";
 import Dashboard from "./pages/admin/dashboard/Dashboard";
 import NewProduct from "./pages/admin/newProduct/NewProduct";
@@ -38,13 +37,12 @@ import ResetPassword from "./pages/auth/resetPassword/ResetPassword";
 import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
 import { axiosInstance } from "./config";
-import { useSelector ,useDispatch} from "react-redux";
-import { getAdminProducts } from "./actions/productAction";
+import {useDispatch} from "react-redux";
+
 
 function App() {
 
     const dispatch = useDispatch();
-    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     
     const [stripeApiKey, setStripeApiKey] = useState("");
 

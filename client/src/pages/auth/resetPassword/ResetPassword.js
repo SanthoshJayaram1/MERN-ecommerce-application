@@ -54,6 +54,7 @@ const ResetPassword = ({ history, match }) => {
                             <div className="form-group">
                                 <label htmlFor="password_field">Password</label>
                                 <input
+                                    required
                                     type="password"
                                     id="password_field"
                                     className="form-control"
@@ -69,6 +70,7 @@ const ResetPassword = ({ history, match }) => {
                                     Confirm Password
                                 </label>
                                 <input
+                                    required
                                     type="password"
                                     id="confirm_password_field"
                                     className="form-control"

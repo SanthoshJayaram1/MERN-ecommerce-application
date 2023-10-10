@@ -118,6 +118,7 @@ const NewProduct = ({ history }) => {
                                 <div className={styles.from_group}>
                                     <label htmlFor="name_field">Name</label>
                                     <input
+                                        required
                                         type="text"
                                         id="name_field"
                                         value={name}
@@ -133,6 +134,7 @@ const NewProduct = ({ history }) => {
                                         Description
                                     </label>
                                     <textarea
+                                        required
                                         id="description_field"
                                         rows="8"
                                         value={description}
@@ -173,6 +175,7 @@ const NewProduct = ({ history }) => {
                                                 Stock
                                             </label>
                                             <input
+                                                required
                                                 type="number"
                                                 id="stock_field"
                                                 value={stock}
@@ -191,6 +194,7 @@ const NewProduct = ({ history }) => {
                                                 Seller Name
                                             </label>
                                             <input
+                                                required
                                                 type="text"
                                                 id="seller_field"
                                                 value={seller}
@@ -206,6 +210,7 @@ const NewProduct = ({ history }) => {
                                                 Price
                                             </label>
                                             <input
+                                                required
                                                 type="text"
                                                 id="price_field"
                                                 value={price}
@@ -221,6 +226,7 @@ const NewProduct = ({ history }) => {
                                 <div className={styles.from_group}>
                                     <label htmlFor="type_field">Types</label>
                                     <select
+                                        required
                                         id="type_field"
                                         value={type}
                                         onChange={(e) =>

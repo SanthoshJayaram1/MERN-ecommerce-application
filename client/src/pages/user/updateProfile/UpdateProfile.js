@@ -107,6 +107,7 @@ const UpdateProfile = ({ history }) => {
                                                 Name
                                             </label>
                                             <input
+                                                required
                                                 className="from_input"
                                                 name="name"
                                                 value={name}
@@ -121,6 +122,7 @@ const UpdateProfile = ({ history }) => {
                                                 Address
                                             </label>
                                             <input
+                                                required
                                                 className="from_input"
                                                 name="address"
                                                 value={address}
@@ -135,6 +137,7 @@ const UpdateProfile = ({ history }) => {
                                                 Phone
                                             </label>
                                             <input
+                                                required 
                                                 className="from_input"
                                                 name="phone"
                                                 value={phone}

@@ -73,6 +73,7 @@ const ChangePassword = ({ history }) => {
                                                 Old Password
                                             </label>
                                             <input
+                                                required
                                                 type="password"
                                                 id="old_password_field"
                                                 value={oldPassword}
@@ -88,6 +89,7 @@ const ChangePassword = ({ history }) => {
                                                 New Password
                                             </label>
                                             <input
+                                                required
                                                 type="password"
                                                 id="new_password_field"
                                                 value={password}
