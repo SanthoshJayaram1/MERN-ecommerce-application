@@ -18,8 +18,6 @@ const Register = ({ history }) => {
     });
 
     const { name, email, password } = user;
-
-    const [avatar, setAvatar] = useState("");
     const [avatarPreview, setAvatarPreview] = useState(
         "https://res.cloudinary.com/mehedi08h/image/upload/v1647280872/react-final/auth/logo_wyrs86.png"
     );
@@ -49,29 +47,11 @@ const Register = ({ history }) => {
         formData.set("name", name);
         formData.set("email", email);
         formData.set("password", password);
-        // formData.set("avatar", avatar);
-        // const formData = {
-        //     name,email,password,avatar
-        // }
-        console.log(formData);
         dispatch(register(formData));
     };
 
     const onChange = (e) => {
-        // if (e.target.name === "avatar") {
-        //     const reader = new FileReader();
-
-        //     reader.onload = () => {
-        //         if (reader.readyState === 2) {
-        //             setAvatarPreview(reader.result);
-        //             setAvatar(reader.result);
-        //         }
-        //     };
-
-        //     reader.readAsDataURL(e.target.files[0]);
-        // } else {
-            setUser({ ...user, [e.target.name]: e.target.value });
-        // }
+        setUser({ ...user, [e.target.name]: e.target.value });
     };
 
     return (
@@ -115,34 +95,6 @@ const Register = ({ history }) => {
                                 onChange={onChange}
                             />
                         </div>
-                        {/* <div className="form-group mt-3">
-                            <label htmlFor="avatar_upload">Avatar</label>
-                            <div className="d-flex align-items-center">
-                                <div className="mt-3">
-                                    <figure className="avatar mr-3 item-rtl">
-                                        <img
-                                            style={{
-                                                height: "50px",
-                                                width: "50px",
-                                                borderRadius: "50%",
-                                            }}
-                                            src={avatarPreview}
-                                            alt="Avatar Preview"
-                                        />
-                                    </figure>
-                                </div>
-                                <div className="image_file ms-2">
-                                    <input
-                                        type="file"
-                                        name="avatar"
-                                        id="customFile"
-                                        accept="iamges/*"
-                                        onChange={onChange}
-                                    />
-                                    <AiOutlineCloudUpload size={20} />
-                                </div>
-                            </div>
-                        </div> */}
                         <div className={styles.from_group}>
                             <button>
                                 {loading ? <ButtonLoader /> : "Register"}
