@@ -74,12 +74,12 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
         "host"
     )}/password/reset/${resetToken}`;
 
-    const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`;
+    const message = `Your password reset link is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`;
 
     try {
         await sendEmail({
             email: user.email,
-            subject: "ShopX Password Recovery",
+            subject: "Shoppify Password Recovery",
             message,
         });
 
