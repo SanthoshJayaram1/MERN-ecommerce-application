@@ -130,9 +130,9 @@ const Payment = () => {
         } catch (error) {
             document.querySelector("#pay_btn").disabled = false;
             alert.error(error.response.data.message);
-            if(error.response.data.message=="Session expired. Try Again!!!"){
-                dispatch(logout());
-            }
+            // if(error.response.data.message=="Session expired. Try Again!!!"){
+            //     dispatch(logout());
+            // }
             
         }
     };

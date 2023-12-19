@@ -47,7 +47,7 @@ const Profile = () => {
                                                     {user && (
                                                         <img
                                                             src={
-                                                                user.avatar.url
+                                                                user.avatar?.url || "https://himcab.admin.ripple-anubudh.tech/static/media/defaultImage.b0698f102d5ca2413c6ab0dc0f4be3ad.svg"
                                                             }
                                                             alt={user?.name}
                                                         />

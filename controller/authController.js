@@ -9,24 +9,21 @@ const sendEmail = require("../utils/sendEmail");
 
 // Register a user   => /api/v1/register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-    console.log("hiiiiiii");
-    console.log(req.body);
-    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-        folder: "shopx/avatar",
-        width: 150,
-        crop: "scale",
-    });
-  console.log(result);
+    // const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    //     folder: "shopx/avatar",
+    //     width: 150,
+    //     crop: "scale",
+    // });
+//   console.log(result);
     const { name, email, password } = req.body;
-    console.log(email+" "+password);
     const user = await User.create({
         name,
         email,
         password,
-        avatar: {
-            public_id: result.public_id,
-            url: result.secure_url,
-        },
+        // avatar: {
+        //     public_id: result.public_id,
+        //     url: result.secure_url,
+        // },
     });
 
     sendToken(user, 200, res);

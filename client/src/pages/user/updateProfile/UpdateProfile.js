@@ -36,7 +36,7 @@ const UpdateProfile = ({ history }) => {
             setName(user.name);
             setAddress(user.address);
             setPhone(user.phone);
-            setAvatarPreview(user.avatar.url);
+            setAvatarPreview(user.avatar?.url || "https://himcab.admin.ripple-anubudh.tech/static/media/defaultImage.b0698f102d5ca2413c6ab0dc0f4be3ad.svg");
         }
 
         if (error) {

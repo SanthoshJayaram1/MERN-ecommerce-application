@@ -28,7 +28,7 @@ const ProfileLink = () => {
                     <div className={styles.profile_links}>
                         <div className="text-center mt-3">
                             {user && (
-                                <img src={user.avatar.url} alt={user?.name} />
+                                <img src={user.avatar?.url || "https://himcab.admin.ripple-anubudh.tech/static/media/defaultImage.b0698f102d5ca2413c6ab0dc0f4be3ad.svg"} alt={user?.name} />
                             )}
 
                             <h4 className="mt-3">{user?.name}</h4>

@@ -49,7 +49,7 @@ const Register = ({ history }) => {
         formData.set("name", name);
         formData.set("email", email);
         formData.set("password", password);
-        formData.set("avatar", avatar);
+        // formData.set("avatar", avatar);
         // const formData = {
         //     name,email,password,avatar
         // }
@@ -58,20 +58,20 @@ const Register = ({ history }) => {
     };
 
     const onChange = (e) => {
-        if (e.target.name === "avatar") {
-            const reader = new FileReader();
+        // if (e.target.name === "avatar") {
+        //     const reader = new FileReader();
 
-            reader.onload = () => {
-                if (reader.readyState === 2) {
-                    setAvatarPreview(reader.result);
-                    setAvatar(reader.result);
-                }
-            };
+        //     reader.onload = () => {
+        //         if (reader.readyState === 2) {
+        //             setAvatarPreview(reader.result);
+        //             setAvatar(reader.result);
+        //         }
+        //     };
 
-            reader.readAsDataURL(e.target.files[0]);
-        } else {
+        //     reader.readAsDataURL(e.target.files[0]);
+        // } else {
             setUser({ ...user, [e.target.name]: e.target.value });
-        }
+        // }
     };
 
     return (
@@ -115,7 +115,7 @@ const Register = ({ history }) => {
                                 onChange={onChange}
                             />
                         </div>
-                        <div className="form-group mt-3">
+                        {/* <div className="form-group mt-3">
                             <label htmlFor="avatar_upload">Avatar</label>
                             <div className="d-flex align-items-center">
                                 <div className="mt-3">
@@ -142,7 +142,7 @@ const Register = ({ history }) => {
                                     <AiOutlineCloudUpload size={20} />
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className={styles.from_group}>
                             <button>
                                 {loading ? <ButtonLoader /> : "Register"}
