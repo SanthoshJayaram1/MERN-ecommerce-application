@@ -16,7 +16,7 @@ dotenv.config();
 app.use(cookieParser());
 app.use(
     cors({
-      origin: 'http://localhost:3000',
+      origin: ['http://localhost:3000','http://ec2-65-1-95-35.ap-south-1.compute.amazonaws.com'],
       credentials: true,// Allow cookies to be sent with the request 
       methods: ['GET','HEAD','PUT','PATCH','POST','DELETE'],
       allowedHeaders:["Content-Type","jwt-token","Access-Control-Allow-Credentials"]
