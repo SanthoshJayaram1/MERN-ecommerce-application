@@ -17,7 +17,7 @@ COPY . .
 RUN npm install -g pm2
 
 # Expose the application port (replace 3000 with your Express app's port if different)
-EXPOSE 3000
+EXPOSE 5000
 
 # Start the application with PM2
 CMD ["pm2-runtime", "start", "index.js"]
