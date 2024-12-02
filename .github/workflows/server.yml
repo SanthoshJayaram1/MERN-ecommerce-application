@@ -62,7 +62,7 @@ jobs:
         fi
 
         # Delete .gitattributes if it exists
-        rm -f .gitattributes
+        rm -f server/.gitattributes
         
         # Apply stashed changes
         git stash apply
