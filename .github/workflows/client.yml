@@ -19,7 +19,7 @@ jobs:
 
     - name: Build and Load Docker image
       run: |
-        docker build --load -t ecommercewebfrontend:latest .
+        docker build --load -t ecommercewebfrontend:latest ./client
 
     - name: Save Docker image
       run: |
