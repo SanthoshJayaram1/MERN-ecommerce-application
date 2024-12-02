@@ -52,7 +52,6 @@ jobs:
         
         # If .gitattributes exists as an untracked file, remove it
         rm -f .gitattributes
-        rm -f server/.gitattributes
         
         # Stash changes from main branch
         git stash push --keep-index
@@ -75,7 +74,7 @@ jobs:
         git add .
 
         # Commit the changes
-        git commit -m "Remove .gitattributes, add Docker image tarball for ecommercewebbackend:latest"
+        git commit -m "add Docker image tarball for ecommercewebbackend:latest"
 
     - name: Push changes to TAR_FILE branch
       env:
