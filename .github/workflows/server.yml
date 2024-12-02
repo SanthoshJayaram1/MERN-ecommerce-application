@@ -44,14 +44,16 @@ jobs:
       run: |
         # Stage and stash all changes, including .gitattributes
         git add .
-        git stash
+        
+        # Stash changes from main branch
+        git stash push --keep-index
 
     - name: Commit changes to TAR_FILE branch
       env:
         GITHUB_TOKEN: ${{ secrets.API_KEY }}
       run: |
-        # Fetch all branches from origin (to ensure TAR_FILE is available)
-        git fetch --all
+        # Switch to TAR_FILE branch
+        git fetch origin
         
         # Check if the TAR_FILE branch exists on the remote
         if git rev-parse --verify origin/TAR_FILE; then
@@ -61,8 +63,8 @@ jobs:
           git checkout -b TAR_FILE  # Create a new TAR_FILE branch if it doesn't exist
         fi
 
-        # Delete .gitattributes if it exists
-        rm -f server/.gitattributes
+        # # Delete .gitattributes if it exists
+        # rm -f server/.gitattributes
         
         # Apply stashed changes
         git stash apply
