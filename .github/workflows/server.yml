@@ -45,17 +45,29 @@ jobs:
         git add .gitattributes ecommercewebbackend.tar
         git commit -m "Add Docker image tarball for ecommercewebbackend:latest"
 
-    - name: Pull the latest changes from TAR_FILE branch
+    - name: Commit changes to TAR_FILE branch
       env:
-        GITHUB_TOKEN: ${{ secrets.API_KEY }}  # Use the token securely
+        GITHUB_TOKEN: ${{ secrets.API_KEY }}
       run: |
+        # Stash changes from main branch
+        git stash push --keep-index
+        
+        # Switch to TAR_FILE branch
         git fetch origin
-        git checkout TAR_FILE
-        git pull origin TAR_FILE  # Pull the latest changes
+        if git rev-parse --verify origin/TAR_FILE; then
+          git checkout TAR_FILE
+          git pull origin TAR_FILE
+        else
+          git checkout -b TAR_FILE
+        fi
+
+        # Apply stashed changes and commit
+        git stash apply
+        git add .
+        git commit -m "Add Docker image tarball for ecommercewebbackend:latest"
 
     - name: Push changes to TAR_FILE branch
       env:
-        GITHUB_TOKEN: ${{ secrets.API_KEY }}  # Use the token securely
+        GITHUB_TOKEN: ${{ secrets.API_KEY }}
       run: |
-        git branch -M TAR_FILE
         git push origin TAR_FILE
