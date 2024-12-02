@@ -50,13 +50,15 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.API_KEY }}
       run: |
-        # Switch to TAR_FILE branch
-        git fetch origin
+        # Fetch all branches from origin (to ensure TAR_FILE is available)
+        git fetch --all
+        
+        # Check if the TAR_FILE branch exists on the remote
         if git rev-parse --verify origin/TAR_FILE; then
           git checkout TAR_FILE
-          git pull origin/TAR_FILE
+          git pull origin TAR_FILE
         else
-          git checkout -b TAR_FILE
+          git checkout -b TAR_FILE  # Create a new TAR_FILE branch if it doesn't exist
         fi
 
         # Apply stashed changes and commit
