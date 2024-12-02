@@ -64,12 +64,14 @@ jobs:
         # Apply stashed changes
         git stash apply
 
-        # Resolve merge conflict (choose the main version of .gitattributes)
-        git checkout --theirs .gitattributes
-        
+        # Resolve the conflict in .gitattributes manually
+        # Choose the version of .gitattributes you want to keep (main's version or TAR_FILE's version)
+        # Here, we will overwrite .gitattributes with the version from the `main` branch:
+        git checkout main -- .gitattributes
+
         # Add all changes and commit
         git add .
-        git commit -m "Add Docker image tarball for ecommercewebbackend:latest, resolved merge conflict in .gitattributes"
+        git commit -m "Add Docker image tarball for ecommercewebbackend:latest, resolved conflict in .gitattributes"
 
     - name: Push changes to TAR_FILE branch
       env:
