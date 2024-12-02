@@ -1,0 +1,61 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'  # Ensure the workflow runs only in the main branch
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+      with:
+        install: true
+
+    - name: Build and Load Docker image
+      run: |
+        docker build --load -t ecommercewebfrontend:latest ./client
+
+    - name: Save Docker image
+      run: |
+        docker save ecommercewebfrontend:latest -o ecommercewebfrontend.tar
+        pwd
+        ls -lrt
+
+    - name: Install Git LFS
+      run: |
+        git lfs install
+
+    - name: Track Docker image tarball with LFS
+      run: |
+        git lfs track "ecommercewebfrontend.tar"
+
+    - name: Configure Git
+      run: |
+        git config --global user.email "santhoshjayaram193@gmail.com"
+        git config --global user.name "JayaramAkula"
+
+    - name: Add Docker image tarball
+      run: |
+        git add .gitattributes ecommercewebfrontend.tar
+        git commit -m "Add Docker image tarball for ecommercewebfrontend:latest"
+
+    - name: Pull the latest changes from TAR_FILE branch
+      env:
+        GITHUB_TOKEN: ${{ secrets.API_KEY }}  # Use the token securely
+      run: |
+        git fetch origin
+        git checkout TAR_FILE
+        git pull origin TAR_FILE  # Pull the latest changes
+
+    - name: Push changes to TAR_FILE branch
+      env:
+        GITHUB_TOKEN: ${{ secrets.API_KEY }}  # Use the token securely
+      run: |
+        git branch -M TAR_FILE
+        git push origin TAR_FILE  # Push the changes
