@@ -50,6 +50,9 @@ jobs:
         # Stash changes from main branch
         git stash
         
+        # Fetch all branches
+        git fetch origin
+        
         # Switch to TAR_FILE branch
         git checkout TAR_FILE
         
