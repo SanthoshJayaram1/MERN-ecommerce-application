@@ -40,11 +40,6 @@ jobs:
         git config --global user.email "santhoshjayaram193@gmail.com"
         git config --global user.name "JayaramAkula"
 
-    - name: Add Docker image tarball
-      run: |
-        git add .gitattributes ecommercewebbackend.tar
-        git commit -m "Add Docker image tarball for ecommercewebbackend:latest"
-
     - name: Commit changes to TAR_FILE branch
       env:
         GITHUB_TOKEN: ${{ secrets.API_KEY }}
