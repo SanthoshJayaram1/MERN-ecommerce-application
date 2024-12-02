@@ -47,11 +47,8 @@ jobs:
         # Stage all changes, but we will unstage .gitattributes later
         git add .
         
-        # Unstage .gitattributes to avoid conflicts
-        git reset .gitattributes
-        
-        # If .gitattributes exists as an untracked file, remove it
-        rm -f .gitattributes
+        # # Unstage .gitattributes to avoid conflicts
+        # git reset .gitattributes
         
         # Stash changes from main branch
         git stash push --keep-index
@@ -66,6 +63,9 @@ jobs:
         else
           git checkout -b TAR_FILE  # Create a new TAR_FILE branch if it doesn't exist
         fi
+
+        # If .gitattributes exists as an untracked file, remove it
+        rm -f .gitattributes ecommercewebfrontend.tar
         
         # Apply stashed changes
         git stash pop
