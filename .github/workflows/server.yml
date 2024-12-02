@@ -17,39 +17,6 @@ jobs:
         git config --global user.email "santhoshjayaram193@gmail.com"
         git config --global user.name "JayaramAkula"
 
-    # - name: Switch to TAR_FILE branch and clean files
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.API_KEY }}
-    #   run: |
-    #     # Fetch the TAR_FILE branch
-    #     git fetch origin
-        
-    #     # Check if the TAR_FILE branch exists on the remote
-    #     if git rev-parse --verify origin/TAR_FILE; then
-    #       git checkout TAR_FILE
-    #       git pull
-    #     else
-    #       git checkout -b TAR_FILE  # Create a new TAR_FILE branch if it doesn't exist
-    #     fi
-
-    #     # Remove specific files if they exist
-    #     rm -f .gitattributes 
-        
-    #     # Stage and commit file deletions if needed
-    #     git add .
-    #     if git diff --cached --quiet; then
-    #       echo "No changes to commit."
-    #     else
-    #       git commit -m "Remove existing .gitattributes"
-    #     fi
-        
-        # Push changes to the TAR_FILE branch
-        # git push origin TAR_FILE
-
-    - name: Switch back to main branch
-      run: |
-        git checkout main
-
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
       with:
