@@ -19,7 +19,7 @@ jobs:
 
     - name: Build and Load Docker image
       run: |
-        docker build --load -t ecommercewebfrontend:latest .
+        docker build --load -t ecommercewebfrontend:latest ./client
 
     - name: Save Docker image
       run: |
@@ -44,6 +44,14 @@ jobs:
       run: |
         git add .gitattributes ecommercewebfrontend.tar
         git commit -m "Add Docker image tarball for ecommercewebfrontend:latest"
+
+    - name: Pull the latest changes from TAR_FILE branch
+      env:
+        GITHUB_TOKEN: ${{ secrets.API_KEY }}  # Use the token securely
+      run: |
+        git fetch origin
+        git checkout TAR_FILE
+        git pull origin TAR_FILE  # Pull the latest changes
 
     - name: Push changes to TAR_FILE branch
       env:
