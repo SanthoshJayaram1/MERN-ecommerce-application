@@ -39,11 +39,11 @@ jobs:
       run: |
         git config --global user.email "santhoshjayaram193@gmail.com"
         git config --global user.name "JayaramAkula"
-        
+
     - name: Stash changes and prepare for branch switch
       run: |
         # Stage and stash all changes, including .gitattributes
-        git add . 
+        git add .
         git stash
 
     - name: Commit changes to TAR_FILE branch
@@ -61,17 +61,17 @@ jobs:
           git checkout -b TAR_FILE  # Create a new TAR_FILE branch if it doesn't exist
         fi
 
+        # Delete .gitattributes if it exists
+        rm -f .gitattributes
+        
         # Apply stashed changes
         git stash apply
 
-        # Resolve the conflict in .gitattributes manually
-        # Choose the version of .gitattributes you want to keep (main's version or TAR_FILE's version)
-        # Here, we will overwrite .gitattributes with the version from the `main` branch:
-        git checkout main -- .gitattributes
-
-        # Add all changes and commit
+        # Add the changes (including the new .gitattributes or any other files)
         git add .
-        git commit -m "Add Docker image tarball for ecommercewebbackend:latest, resolved conflict in .gitattributes"
+
+        # Commit the changes
+        git commit -m "Remove .gitattributes, add Docker image tarball for ecommercewebbackend:latest"
 
     - name: Push changes to TAR_FILE branch
       env:
