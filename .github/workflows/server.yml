@@ -50,6 +50,10 @@ jobs:
         # Unstage .gitattributes to avoid conflicts
         git reset .gitattributes
         
+        # If .gitattributes exists as an untracked file, remove it
+        rm -f .gitattributes
+        rm -f server/.gitattributes
+        
         # Stash changes from main branch
         git stash push --keep-index
         
@@ -63,10 +67,6 @@ jobs:
         else
           git checkout -b TAR_FILE  # Create a new TAR_FILE branch if it doesn't exist
         fi
-
-        # Delete .gitattributes if it exists
-        rm -f .gitattributes
-        rm -f server/.gitattributes
         
         # Apply stashed changes
         git stash pop
