@@ -40,34 +40,33 @@ jobs:
         git config --global user.email "santhoshjayaram193@gmail.com"
         git config --global user.name "JayaramAkula"
 
-    - name: Stash changes and prepare for branch switch
+    - name: Stash changes and prepare for branch switch, Commit changes to TAR_FILE branch
+      env:
+        GITHUB_TOKEN: ${{ secrets.API_KEY }}
       run: |
         # Stage and stash all changes, including .gitattributes
         git add .
         
         # Stash changes from main branch
         git stash push --keep-index
-
-    - name: Commit changes to TAR_FILE branch
-      env:
-        GITHUB_TOKEN: ${{ secrets.API_KEY }}
-      run: |
+        
         # Switch to TAR_FILE branch
         git fetch origin
         
         # Check if the TAR_FILE branch exists on the remote
         if git rev-parse --verify origin/TAR_FILE; then
           git checkout TAR_FILE
-          git pull origin TAR_FILE
+          git pull
         else
           git checkout -b TAR_FILE  # Create a new TAR_FILE branch if it doesn't exist
         fi
 
-        # # Delete .gitattributes if it exists
-        # rm -f server/.gitattributes
+        # Delete .gitattributes if it exists
+        rm -f .gitattributes
+        rm -f server/.gitattributes
         
         # Apply stashed changes
-        git stash apply
+        git stash pop
 
         # Add the changes (including the new .gitattributes or any other files)
         git add .
