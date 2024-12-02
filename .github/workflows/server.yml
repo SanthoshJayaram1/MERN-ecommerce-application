@@ -12,6 +12,44 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Configure Git
+      run: |
+        git config --global user.email "santhoshjayaram193@gmail.com"
+        git config --global user.name "JayaramAkula"
+
+    - name: Switch to TAR_FILE branch and clean files
+      env:
+        GITHUB_TOKEN: ${{ secrets.API_KEY }}
+      run: |
+        # Fetch the TAR_FILE branch
+        git fetch origin
+        
+        # Check if the TAR_FILE branch exists on the remote
+        if git rev-parse --verify origin/TAR_FILE; then
+          git checkout TAR_FILE
+          git pull
+        else
+          git checkout -b TAR_FILE  # Create a new TAR_FILE branch if it doesn't exist
+        fi
+
+        # Remove specific files if they exist
+        rm -f .gitattributes ecommercewebbackend.tar
+        
+        # Stage and commit file deletions if needed
+        git add .
+        if git diff --cached --quiet; then
+          echo "No changes to commit."
+        else
+          git commit -m "Remove existing .gitattributes and ecommercewebbackend.tar"
+        fi
+        
+        # Push changes to the TAR_FILE branch
+        git push origin TAR_FILE
+
+    - name: Switch back to main branch
+      run: |
+        git checkout main
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
       with:
@@ -35,11 +73,6 @@ jobs:
       run: |
         git lfs track "ecommercewebbackend.tar"
 
-    - name: Configure Git
-      run: |
-        git config --global user.email "santhoshjayaram193@gmail.com"
-        git config --global user.name "JayaramAkula"
-
     - name: Stash changes and prepare for branch switch, Commit changes to TAR_FILE branch
       env:
         GITHUB_TOKEN: ${{ secrets.API_KEY }}
@@ -47,25 +80,11 @@ jobs:
         # Stage all changes, but we will unstage .gitattributes later
         git add .
         
-        # # Unstage .gitattributes to avoid conflicts
-        # git reset .gitattributes
-        
         # Stash changes from main branch
-        git stash push --keep-index
+        git stash
         
         # Switch to TAR_FILE branch
-        git fetch origin
-        
-        # Check if the TAR_FILE branch exists on the remote
-        if git rev-parse --verify origin/TAR_FILE; then
-          git checkout TAR_FILE
-          git pull
-        else
-          git checkout -b TAR_FILE  # Create a new TAR_FILE branch if it doesn't exist
-        fi
-
-        # If .gitattributes exists as an untracked file, remove it
-        rm -f .gitattributes ecommercewebbackend.tar
+        git checkout TAR_FILE
         
         # Apply stashed changes
         git stash pop
@@ -74,7 +93,7 @@ jobs:
         git add .
 
         # Commit the changes
-        git commit -m "add Docker image tarball for ecommercewebbackend:latest"
+        git commit -m "Add Docker image tarball for ecommercewebbackend:latest"
 
     - name: Push changes to TAR_FILE branch
       env:
