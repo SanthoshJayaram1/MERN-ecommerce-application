@@ -65,7 +65,7 @@ jobs:
         fi
 
         # If .gitattributes exists as an untracked file, remove it
-        rm -f .gitattributes ecommercewebfrontend.tar
+        rm -f .gitattributes ecommercewebbackend.tar
         
         # Apply stashed changes
         git stash pop
