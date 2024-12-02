@@ -64,9 +64,9 @@ jobs:
           git checkout -b TAR_FILE  # Create a new TAR_FILE branch if it doesn't exist
         fi
 
-        # # Delete .gitattributes if it exists
-        # rm -f .gitattributes
-        # rm -f server/.gitattributes
+        # Delete .gitattributes if it exists
+        rm -f .gitattributes
+        rm -f server/.gitattributes
         
         # Apply stashed changes
         git stash pop
