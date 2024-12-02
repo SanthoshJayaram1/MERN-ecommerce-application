@@ -42,7 +42,7 @@ jobs:
 
     - name: Add Docker image tarball
       run: |
-        git add .gitattributes ecommercewebfrontend.tar
+        git add .  # Stage all changes
         git commit -m "Add Docker image tarball for ecommercewebfrontend:latest"
 
     - name: Pull the latest changes from TAR_FILE branch
@@ -58,4 +58,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.API_KEY }}  # Use the token securely
       run: |
         git branch -M TAR_FILE
-        git push origin TAR_FILE  # Push the changes
+        git push origin TAR_FILE
