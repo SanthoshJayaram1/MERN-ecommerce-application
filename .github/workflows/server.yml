@@ -61,10 +61,15 @@ jobs:
           git checkout -b TAR_FILE  # Create a new TAR_FILE branch if it doesn't exist
         fi
 
-        # Apply stashed changes and commit
+        # Apply stashed changes
         git stash apply
+
+        # Resolve merge conflict (choose the main version of .gitattributes)
+        git checkout --theirs .gitattributes
+        
+        # Add all changes and commit
         git add .
-        git commit -m "Add Docker image tarball for ecommercewebbackend:latest"
+        git commit -m "Add Docker image tarball for ecommercewebbackend:latest, resolved merge conflict in .gitattributes"
 
     - name: Push changes to TAR_FILE branch
       env:
