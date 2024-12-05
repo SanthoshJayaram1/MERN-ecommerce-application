@@ -20,7 +20,6 @@
 FROM nginx:latest
 
 
-
 # Copy the custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
