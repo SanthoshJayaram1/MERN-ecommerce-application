@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    
+    triggers {
+        githubPush()
+    }
+
+    environment {
+        CLONE_DIR = '/gitRepos'
+        CODE_PATH = '/gitRepos/MERN-ecommerce-application'
+        FRONTEND_SERVER = 'ubuntu@ec2-13-201-81-247.ap-south-1.compute.amazonaws.com'
+        SSH_KEY = '/var/lib/jenkins/.ssh/ecom_ec2_key.pem'
+    }
+
+    stages {
+        stage('Deploy to Target Instance') {
+            steps {
+                script {
+                    sh """
+                        ssh -i ${SSH_KEY} ${FRONTEND_SERVER} \
+                        "cd ${CLONE_DIR} && \
+                        sudo rm -rf MERN-ecommerce-application && \
+                        sudo git clone https://github.com/SanthoshJayaram1/MERN-ecommerce-application.git && \
+                        sudo docker stop mern-ecommerce-application_server_1 || true && \
+                        sudo docker rm mern-ecommerce-application_server_1 || true && \
+                        cd MERN-ecommerce-application/server || { echo 'Server directory not found'; exit 1; } && \
+                        echo 'Building Docker image...' && \
+                        sudo docker build -t mern-ecommerce-application_server:latest . && \
+                        echo 'Running the Docker container...' && \
+                        sudo docker run -d --name mern-ecommerce-application_server_1 -p 5000:5000 --network mern-ecommerce-application_default --env-file ${CODE_PATH}/server/.env mern-ecommerce-application_server:latest"
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                echo 'Pipeline completed'
+            }
+        }
+    }
+}
