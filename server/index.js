@@ -70,5 +70,6 @@ app.use(errorMiddleware);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
+  console.log(PORT);
   console.log("Server is running on port", PORT);
 });
